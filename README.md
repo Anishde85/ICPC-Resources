@@ -1,4 +1,3 @@
-# ICPC-Resources
-Repo for storing the resources
+# ICPC/CP-Resources
 
-Templates for using in ICPC
+Templates for using in ICPC/CP
