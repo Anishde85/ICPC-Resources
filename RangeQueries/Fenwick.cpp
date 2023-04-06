@@ -1,10 +1,3 @@
-#include<bits/stdc++.h>
-
-using namespace std;
- 
-typedef long long ll;
-//**************************************************
-
 // For finding maximum in (1, r)..we can change "+=" to "max()".
 // But in update operation value will never decrease.
 // It is not easy to calculate maximum of (l, r) using BIT 
@@ -35,8 +28,3 @@ struct BIT {
         return sum;
     }
 };
-
-int main() {
-
-	return 0;
-}
