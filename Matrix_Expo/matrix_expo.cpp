@@ -1,6 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-
 const int mod = 1e9 + 7;
 
 vector<vector<int>> mult_mat(vector<vector<int>> &a, vector<vector<int>> &b) {
@@ -77,12 +74,4 @@ int fibonacciNumber(int n) {
     }
 
     return ans[0][0];
-}
-
-int main() {
-    int x = 10;
-
-    cout << fibonacciNumber(x) << '\n';
-
-    return 0;
 }
