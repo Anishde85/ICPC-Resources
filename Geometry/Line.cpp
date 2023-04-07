@@ -1,26 +1,37 @@
-/**
-    @brief use code of Point.cpp
-*/
-struct line_segment {
-    point p1, p2;
-    line_segment() {}
-    line_segment(point _p1, point _p2) : p1(_p1), p2(_p2) {}
+#define EPS 1e-9
+struct line {
+    double a, b, c;
 };
-istream &operator>>(istream &istream, line_segment &l) {
-    cin >> l.p1 >> l.p2;
-    return istream;
+// the answer is stored in the third parameter (pass by reference)
+void pointsToLine(point p1, point p2, line &l) {
+    if (fabs(p1.x - p2.x) < EPS) { // vertical line is fine
+        l.a = 1.0;
+        l.b = 0.0;
+        l.c = -p1.x; // default values
+    } else {
+        l.a = -(double)(p1.y - p2.y) / (p1.x - p2.x);
+        l.b = 1.0; // IMPORTANT: we fix the value of b to 1.0
+        l.c = -(double)(l.a * p1.x) - p1.y;
+    }
 }
-bool is_colinear(point p1, point p2, point p3) {
-    return get_orientation(p1, p2, p3) == 0 and p3.x >= min(p1.x, p2.x) and p3.x <= max(p1.x, p2.x) and p3.y >= min(p1.y, p2.y) and p3.y <= max(p1.y, p2.y);
+
+bool areParallel(line l1, line l2) { // check coefficients a & b
+    return (fabs(l1.a - l2.a) < EPS) && (fabs(l1.b - l2.b) < EPS);
 }
-bool do_intersect(line_segment &l1, line_segment &l2) {
-    int ori1 = get_orientation(l1.p1, l1.p2, l2.p1);
-    int ori2 = get_orientation(l1.p1, l1.p2, l2.p2);
-    int ori3 = get_orientation(l2.p1, l2.p2, l1.p1);
-    int ori4 = get_orientation(l2.p1, l2.p2, l1.p2);
-    if (ori1 != ori2 and ori3 != ori4)
-        return true;
-    bool case1 = is_colinear(l1.p1, l1.p2, l2.p1) or is_colinear(l1.p1, l1.p2, l2.p2);
-    bool case2 = is_colinear(l2.p1, l2.p2, l1.p1) or is_colinear(l2.p1, l2.p2, l1.p2);
-    return (case1 or case2);
+bool areSame(line l1, line l2) { // also check coefficient c
+    return areParallel(l1, l2) && (fabs(l1.c - l2.c) < EPS);
+}
+
+// returns true (+ intersection point) if two lines are intersect
+bool areIntersect(line l1, line l2, point &p) {
+    if (areParallel(l1, l2))
+        return false; // no intersection
+    // solve system of 2 linear algebraic equations with 2 unknowns
+    p.x = (l2.b * l1.c - l1.b * l2.c) / (l2.a * l1.b - l1.a * l2.b);
+    // special case: test for vertical line to avoid division by zero
+    if (fabs(l1.b) > EPS)
+        p.y = -(l1.a * p.x + l1.c);
+    else
+        p.y = -(l2.a * p.x + l2.c);
+    return true;
 }
