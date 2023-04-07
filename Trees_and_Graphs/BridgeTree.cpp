@@ -34,7 +34,8 @@ void dfs1(int node, int par) {
     vis[node] = true;
     comp[node] = component_number;
     for (int i = 0; i < g[node].size(); i++) {
-        if (vis[g[node][i].first] || isBridge[g[node][i].second]) // next node has already been visited or current edge is a bridge
+        if (vis[g[node][i].first] || isBridge[g[node][i].second]) 
+        // next node has already been visited or current edge is a bridge
             continue;
         dfs1(g[node][i].first, node);
     }

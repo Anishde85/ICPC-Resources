@@ -36,7 +36,8 @@ T area2(PT a, PT b, PT c) { return cross(a, b) + cross(b, c) + cross(c, a); }
 
 #ifdef REMOVE_REDUNDANT
 bool between(const PT &a, const PT &b, const PT &c) {
-    return (fabs(area2(a, b, c)) < EPS && (a.x - b.x) * (c.x - b.x) <= 0 && (a.y - b.y) * (c.y - b.y) <= 0);
+    return (fabs(area2(a, b, c)) < EPS 
+    && (a.x - b.x) * (c.x - b.x) <= 0 && (a.y - b.y) * (c.y - b.y) <= 0);
 }
 #endif
 

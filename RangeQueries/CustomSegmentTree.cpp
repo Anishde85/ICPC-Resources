@@ -69,7 +69,8 @@ public:
         lazy.resize(4 * n);
         tree.resize(4 * n);
     }
-    SegmentTree(vector<T> &initial_value, T _IDENTITY_ELEMENT) : SegmentTree((int)initial_value.size(), _IDENTITY_ELEMENT) {
+    SegmentTree(vector<T> &initial_value, T _IDENTITY_ELEMENT) : 
+    SegmentTree((int)initial_value.size(), _IDENTITY_ELEMENT) {
         build(1, 0, n - 1, initial_value);
     }
     T query(int left, int right) {

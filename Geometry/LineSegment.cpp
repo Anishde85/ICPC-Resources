@@ -11,7 +11,9 @@ istream &operator>>(istream &istream, line_segment &l) {
     return istream;
 }
 bool is_colinear(point p1, point p2, point p3) {
-    return get_orientation(p1, p2, p3) == 0 and p3.x >= min(p1.x, p2.x) and p3.x <= max(p1.x, p2.x) and p3.y >= min(p1.y, p2.y) and p3.y <= max(p1.y, p2.y);
+    return get_orientation(p1, p2, p3) == 0 
+    and p3.x >= min(p1.x, p2.x) and p3.x <= max(p1.x, p2.x) 
+    and p3.y >= min(p1.y, p2.y) and p3.y <= max(p1.y, p2.y);
 }
 bool do_intersect(line_segment &l1, line_segment &l2) {
     int ori1 = get_orientation(l1.p1, l1.p2, l2.p1);
